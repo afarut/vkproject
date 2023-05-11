@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "logs.middleware.CustomLoguruMiddleware",
 ]
 
 ROOT_URLCONF = 'vkproject.urls'
@@ -172,3 +173,9 @@ default_user_authentication_rule",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
+
+if DEBUG:
+    SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"] = timedelta(weeks=2)
+
+
+LOGURU_LOGGING = {"ROTATION": "10 KB", "COMPRESSION": "zip"}
