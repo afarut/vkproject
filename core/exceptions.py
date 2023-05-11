@@ -1,5 +1,6 @@
 class LinkExistsException(Exception):
-	pass
+    pass
+
 
 class OneUserException(Exception):
-	pass
+    pass

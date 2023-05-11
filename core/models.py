@@ -10,11 +10,7 @@ class FriendChain(models.Model):
         on_delete=models.CASCADE,
         related_name="from_user",
     )
-    to_user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="to_user"
-    )
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user")
     is_friend = models.BooleanField(default=False)
     was_rejected = models.BooleanField(default=False)
 

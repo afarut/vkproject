@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_rename_friends_friendchain'),
+        ("core", "0002_rename_friends_friendchain"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='friendchain',
-            name='is_subscriber',
+            model_name="friendchain",
+            name="is_subscriber",
             field=models.BooleanField(default=False),
         ),
     ]
