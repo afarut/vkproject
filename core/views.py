@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from core.models import FriendChain
 from django.db.models import Q
 
+
 User = get_user_model()
 
 
@@ -16,6 +17,12 @@ class UserApiView(generics.ListAPIView):  # List of all users
 
 class UserCreateAPIView(generics.CreateAPIView):  # Registration
     serializer_class = UserCreateSerializer
+    authentication_classes = []
+    permission_classes = []
+
+    # def post(self, request):
+    #    request.data["password"] = make_password(request.data["password"])
+    #    return super().post(request)
 
 
 class UserFriendListAPIView(generics.ListAPIView):  # Getting friend list
@@ -33,7 +40,7 @@ class UserFriendListAPIView(generics.ListAPIView):  # Getting friend list
 
 class UserSubscriberListAPIView(
     generics.ListAPIView
-):  # Getting list with people, which user rejected in last
+):  # Getting list of people, which user rejected in last
     serializer_class = UserSerializer
 
     def get_queryset(self):
@@ -95,3 +102,21 @@ class UserDeleteFriendAPIView(APIView):  # Delete friend
         )
         chain.delete()
         return Response({"status": "ok"})
+
+
+class UserGoFriendAPIView(APIView):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        status = "outgoing friend request"
+        try:
+            chain = FriendChain.objects.get(
+                Q(to_user=user, from_user=request.user)
+                | Q(to_user=request.user, from_user=user)
+            )
+            if chain.to_user == request.user:
+                chain.is_friend = True
+                chain.save()
+                status = "You are friends"
+        except FriendChain.DoesNotExist:
+            FriendChain.objects.create(from_user=request.user, to_user=user)
+        return Response({"status": status})
