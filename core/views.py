@@ -120,3 +120,24 @@ class UserGoFriendAPIView(APIView):
         except FriendChain.DoesNotExist:
             FriendChain.objects.create(from_user=request.user, to_user=user)
         return Response({"status": status})
+
+
+class UserRejectFriendAPIView(APIView):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        status = "outgoing friend request"
+        try:
+            chain = FriendChain.objects.get(
+                Q(to_user=user, from_user=request.user)
+                | Q(to_user=request.user, from_user=user)
+            )
+            if chain.from_user == request.user:
+                chain.delete()
+                status = "You are take you request"
+            elif chain.to_user == request.user:
+                status = "You reject this user"
+                chain.was_rejected = True
+                chain.save()
+        except FriendChain.DoesNotExist:
+            status = "Bad request"
+        return Response({"status": status})

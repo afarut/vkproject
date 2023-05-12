@@ -12,7 +12,9 @@ class FriendChain(models.Model):
     )
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user")
     is_friend = models.BooleanField(default=False)
-    was_rejected = models.BooleanField(default=False)
+    was_rejected = models.BooleanField(
+        default=False
+    )  # For filtration of rejected user (subscribers)
 
     def __str__(self):
         if self.is_friend:

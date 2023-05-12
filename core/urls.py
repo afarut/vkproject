@@ -13,4 +13,5 @@ urlpatterns = [
     path("user/<int:pk>/", views.UserLinkInfoAPIView.as_view()),
     path("user/delete/<int:pk>/", views.UserDeleteFriendAPIView.as_view()),
     path("user/gofriend/<int:pk>/", views.UserGoFriendAPIView.as_view()),
+    path("user/reject/<int:pk>/", views.UserRejectFriendAPIView.as_view()),
 ]
