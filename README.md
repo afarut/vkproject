@@ -25,6 +25,11 @@ If you want to refresh, use it:
 ```url
 http://localhost:8000/api/token/refresh/
 ```
+**_NOTE:_** In every requests down the list you must to add the next header:
+```url
+Authorization: Bearer YOUR_TOKEN
+```
+
 
 ### Get subscribers list
 Getting list of people, which user rejected in last
