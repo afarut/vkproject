@@ -2,8 +2,8 @@
 
 ## Instalation
 ```bash
-python -m venv env
-pip install -r requirements.txt
+sudo docker-compose up -d --build
+sudo docker-compose exec web python manage.py migrate --noinput
 ```
 
 ## Rest Api
