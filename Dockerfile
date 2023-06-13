@@ -1,20 +1,13 @@
 FROM python:3.10
 
-RUN apt update --no-install-recommends -y
-
-
-
-RUN mkdir /app
+RUN mkdir /app && mkdir /app/static
 
 WORKDIR /app
 
 EXPOSE 8000
 
-RUN mkdir /app/static
-
-COPY . /app/
+COPY . .
 
 RUN pip install -r requirements.txt
 
 CMD ["bash", "run.sh"]
-

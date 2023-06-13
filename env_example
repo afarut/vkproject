@@ -1,2 +1,2 @@
-DJANGO_SECRET_KEY=
-DEBUG=
+DJANGO_SECRET_KEY=django-secret-key
+DEBUG=True

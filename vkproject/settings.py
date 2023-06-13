@@ -30,6 +30,7 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", default="django-default-secret-key", ca
 DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 
 
 # Application definition
@@ -84,8 +85,12 @@ WSGI_APPLICATION = "vkproject.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "test_db",
+        "USER": "root",
+        "PASSWORD": "root",
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 

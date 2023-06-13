@@ -6,3 +6,5 @@ __pycache__/
 db.sqlite3
 *.log
 *.log.zip
+/postgres_data
+/.cache
